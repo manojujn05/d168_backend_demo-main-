@@ -26,7 +26,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd /var/www/html/app/my-react-app
+          cd /var/www/html/d168_backend_demo-main-
           git pull origin main
           npm install -g serve
           serve -s build > serve.log 2>&1 &
