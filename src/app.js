@@ -13,6 +13,12 @@ app.use(bodyParser.json({ limit: "500mb" }));
 app.use(bodyParser.urlencoded({ limit: "500mb", extended: true }));
 app.use(cors());
 
+// Update the origin option in the cors middleware
+app.use(
+  cors({
+    origin: "http://my-reactjs-app.s3-website-us-east-1.amazonaws.com",
+  })
+);
 app.use(User);
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));

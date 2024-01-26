@@ -1,0 +1,39 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          cd /var/www/html/app/my-react-app
+          git pull origin main
+          npm install -g serve
+          serve -s build > serve.log 2>&1 &
+
+          #Print process ID (PID) of the background serve process
+          echo "Serve process ID: $!"
+
+          # Add any other deployment steps, e.g., restarting the server
+          # (Make sure to give serve some time to start before running other steps)
+          sleep 5

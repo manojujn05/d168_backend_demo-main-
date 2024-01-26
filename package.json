@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=development nodemon src/app.js",
-    "start:local": "NODE_ENV=local nodemon src/app.js",
-    "start:prod": "NODE_ENV=production node src/app.js"
+    "start": "nodemon src/app.js",
+    "start:local": "nodemon src/app.js",
+    "start:prod": "node src/app.js"
   },
   "keywords": [],
   "author": "",
